@@ -1,0 +1,80 @@
+body {
+  color: #3d3d3d;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+.viewPort {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+}
+
+.panelsRow {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  flex: 1;
+}
+
+.logoBar {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 30px;
+  background: #09a2e4;
+  vertical-align: middle;
+  border-bottom: 2px solid #000000;
+}
+
+.logoText {
+  color: #ffffff;
+  flex: 2;
+  font-family: Tahoma;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: Bold;
+  padding-left: 5px;
+}
+
+.timeBar {
+  align-items: stretch;
+  background: #09a2e4;
+  border-top: 2px solid #000000;
+  color: #ffffff;
+  font-family: Tahoma;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: Bold;
+  height: 30px;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
+.mapPanel {
+  flex: 1;
+  padding: 20px;
+  font-size: 16px;
+  font-family: Tahoma;
+}
+
+.detailPanel {
+  width: 300px;
+  border-left: 2px solid #000000;
+  font-size: 22px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Tahoma;
+  text-align: center;
+  padding-top: 12px;
+}
