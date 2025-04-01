@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Context = void 0;
+var Context;
+(function (Context) {
+    Context[Context["Work"] = 0] = "Work";
+    Context[Context["Business"] = 1] = "Business";
+    Context[Context["School"] = 2] = "School";
+    Context[Context["University"] = 3] = "University";
+    Context[Context["Holiday"] = 4] = "Holiday";
+    Context[Context["DayOut"] = 5] = "DayOut";
+    Context[Context["Appointment"] = 6] = "Appointment";
+    Context[Context["Dating"] = 7] = "Dating";
+    Context[Context["Marriage"] = 8] = "Marriage";
+    Context[Context["Burial"] = 9] = "Burial";
+    Context[Context["Hospitalization"] = 10] = "Hospitalization";
+    Context[Context["BirthPlace"] = 11] = "BirthPlace";
+    Context[Context["Home"] = 12] = "Home";
+    Context[Context["FormerHome"] = 13] = "FormerHome";
+    Context[Context["ChurchAttending"] = 14] = "ChurchAttending";
+    Context[Context["MoskAttending"] = 15] = "MoskAttending";
+    Context[Context["TempleVisiting"] = 16] = "TempleVisiting";
+    Context[Context["Concert"] = 17] = "Concert";
+    Context[Context["SportGame"] = 18] = "SportGame";
+    Context[Context["Other"] = 19] = "Other";
+    Context[Context["Unknown"] = 20] = "Unknown";
+})(Context || (exports.Context = Context = {}));
