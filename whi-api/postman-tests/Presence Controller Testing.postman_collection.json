@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "479dbf3d-ee87-4be2-bda3-679e1b362a13",
+		"name": "Presence Controller Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43582345"
+	},
+	"item": [
+		{
+			"name": "Get Any Presences Bare",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3033/presences",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pesences for Person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3033/presence/12345678-0123-0123-0123-123456789ABC",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence",
+						"12345678-0123-0123-0123-123456789ABC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Presence",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF\",\r\n    \"place\": \"19283746-0128-0827-0388-128337183722\",\r\n    \"from\": 1577833200000,\r\n    \"to\": 1609455600000,\r\n    \"company\": [],\r\n    \"context\": 1,\r\n    \"reason\": \"this is the place I like to be most\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3033/presence/12345678-0123-0123-0123-123456789ABC",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence",
+						"12345678-0123-0123-0123-123456789ABC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Related Person to presence",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3033/presence/FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF/plus/55555678-0234-0234-0321-555556789ABC",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence",
+						"FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF",
+						"plus",
+						"55555678-0234-0234-0321-555556789ABC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Presence",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF\",\r\n    \"place\": \"19283746-0128-0827-0388-128337183722\",\r\n    \"from\": 1577833200000,\r\n    \"to\": 1609455600000,\r\n    \"company\": [],\r\n    \"context\": 4,\r\n    \"reason\": \"this is the place where I am now and then\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3033/presence",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Presence",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF\",\r\n    \"place\": \"19283746-0128-0827-0388-128337183722\",\r\n    \"from\": 1577833200000,\r\n    \"to\": 1609455600000,\r\n    \"company\": [],\r\n    \"context\": 4,\r\n    \"reason\": \"this is the place where I am now and then\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3033/presence/12345678-0123-0123-0123-123456789ABC",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence",
+						"12345678-0123-0123-0123-123456789ABC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Person From Presence",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3033/presence/FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF/minus/55555678-0234-0234-0321-555556789ABC",
+					"host": [
+						"localhost"
+					],
+					"port": "3033",
+					"path": [
+						"presence",
+						"FFAAFFAA-0FAE-0FAD-0FAB-AABBCCDDEEFF",
+						"minus",
+						"55555678-0234-0234-0321-555556789ABC"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

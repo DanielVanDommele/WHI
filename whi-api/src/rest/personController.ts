@@ -20,12 +20,12 @@ export default class PersonController extends ControllerBase {
       this.getApp().get(`${this.#baseUrl}s`, (req: Request, res: Response) => this.#getPersons(req, res));
       this.getApp().get(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#getPerson(req, res));
       this.getApp().get(`${this.#baseUrl}/relations/:id`, (req: Request, res: Response) => this.#getPersonRelations(req, res));
-      this.getApp().get(`${this.#baseUrl}/relations/:relationType/:id`, (req: Request, res: Response) => this.#getPersonSpecificRelations);
+      this.getApp().get(`${this.#baseUrl}/relations/:relationType/:id`, (req: Request, res: Response) => this.#getPersonSpecificRelations(req, res));
 
       this.getApp().post(`${this.#baseUrl}`, (req: Request, res: Response) => this.#addPerson(req, res));
       this.getApp().post(`${this.#baseUrl}/relations/:id`, (req: Request, res: Response) => this.#addPersonRelation(req, res));
 
-      this.getApp().put(`${this.#baseUrl}`, (req: Request, res: Response) => this.#updatePerson(req, res));
+      this.getApp().put(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#updatePerson(req, res));
 
       this.getApp().delete(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#deletePerson(req, res));
       this.getApp().delete(`${this.#baseUrl}/relations/:id1/:id2`, (req: Request, res: Response) => this.#deletePersonRelation(req, res));

@@ -8,6 +8,10 @@ export default class PlacePersist  extends PersistBase {
         return this.checkTableExistance('place', 'id TEXT PRIMARY KEY, lat INT, long INT, name TEXT, description TEXT');
     }
 
+    getPlaces() : Promise <Place[]> {
+        return this.retrieveList('SELECT * FROM place');
+    }
+
     getPlace(id: UUID) : Promise<Place> {
         return this.retrieve(`SELECT * FROM place WHERE id = '${id}'`);
     }

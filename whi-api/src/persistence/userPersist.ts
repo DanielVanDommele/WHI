@@ -5,7 +5,11 @@ import PersistBase from "./PersistBase";
 
 export default class UserPersist extends PersistBase {
     initialize(): Promise<boolean> {
-        return this.checkTableExistance('user', 'id TEXT PRIMARY KEY, personId TEXT, email TEXT, password TEXT, lastLogin INT');
+        return this.checkTableExistance('user', 'id TEXT PRIMARY KEY, personId TEXT, active INT, email TEXT, password TEXT, lastLogin INT');
+    }
+
+    async getUsers(): Promise<User[]> {
+        return await this.retrieveList('SELECT * FROM user');
     }
 
     async getUser(id: UUID): Promise<User> {
@@ -17,14 +21,14 @@ export default class UserPersist extends PersistBase {
     }
 
     addUser(user: User) {
-        this.execute(`INSERT INTO user VALUES ('${user.id}', '${user.personId}', '${user.email}', '${user.password}', 0)`);
+        this.execute(`INSERT INTO user VALUES ('${user.id}', '${user.personId}', ${user.active}, '${user.email}', '${user.password}', 0)`);
     }
 
     updateUserField(userId: UUID, fieldName: string, fieldValue: any) {
         this.execute(`UPDATE user SET ${fieldName} = '${fieldValue}' WHERE id = '${userId}'`);
     }
 
-    deleteUser(userId: string) {
+    deleteUser(userId: UUID) {
         this.execute(`DELETE FROM user WHERE id = '${userId}'`);
     }
 }

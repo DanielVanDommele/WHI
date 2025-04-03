@@ -56,17 +56,17 @@ export default class ControllerBase {
     }
 
     isAuthorized(req: Request, res: Response): boolean {
+        const sessionId: string = req.get("sess") ?? "";
+        if (sessionId === "" || this.#userSessions[sessionId] === undefined) {
+            // there is no login or logged in user is not known
+            res.status(403).send("you are not authorized");
+            return false;
+        }
         return true;
-        // const sessionId: string = req.get("sess") ?? "";
-        // if (sessionId === "" || this.#userSessions[sessionId] === undefined) {
-        //     // there is no login or logged in user is not known
-        //     res.status(403).send("you are not authorized");
-        //     return false;
-        // }
-        // return true;
     }
 
     isValidRequest(req: Request, res: Response, validator: Function): boolean {
+        console.log(validator());
         if (validator()) {
             return true;
         }
@@ -75,11 +75,13 @@ export default class ControllerBase {
     }
 
     notFound(res: Response, sessionId: string) {
+        console.log('notFound');
         res.set("sess", sessionId);
         res.status(404).send("requested resource is not found");
     }
 
     internalError(res: Response, sessionId: string) {
+        console.log('internalError');
         res.set("sess", sessionId);
         res.status(500).send("internal server error");
     }

@@ -17,6 +17,7 @@ export default class PresenceController extends ControllerBase {
     }
   
     setup() {
+      this.getApp().get(`${this.#baseUrl}s`, (req: Request, res: Response) => this.#getAnyPresences(req, res));
       this.getApp().get(`${this.#baseUrl}/:personId`, (req: Request, res: Response) => this.#getPersonPresences(req, res));
 
       this.getApp().post(`${this.#baseUrl}/:personId`, (req: Request, res: Response) => this.#addPresence(req, res));
@@ -36,6 +37,12 @@ export default class PresenceController extends ControllerBase {
              !isNaN(presence.to) &&
              presence.reason !== "" &&
              (presence.place !== null || this.validateId(presence.place));
+    }
+
+    #getAnyPresences(req: Request, res: Response) {
+      const validator = () => true;
+      const operation = () => this.#persist.getAnyPresences();
+      this.handleRestCall(req, res, validator, operation);
     }
 
     #getPersonPresences(req: Request, res: Response) {
@@ -80,7 +87,7 @@ export default class PresenceController extends ControllerBase {
       const personId: UUID = this.uuidFromString(req.params.personId);
       const presence: Presence = req.body;
       const validator = () => this.validateId(personId) && this.validatePresence(presence);
-      const operation = () => this.#persist.deletePresence(presence, personId);
+      const operation = () => Promise.resolve(this.#persist.deletePresence(presence, personId));
       this.handleRestCall(req, res, validator, operation);
     }
   }

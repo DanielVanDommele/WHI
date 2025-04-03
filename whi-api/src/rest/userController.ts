@@ -12,15 +12,17 @@ interface LoginData {
 
 export default class UserController extends ControllerBase {
   #baseUrl: string;
-  #persist: UserPersist;
+  persist: UserPersist;
 
   constructor(app: any, userSessions: any, persist: UserPersist) {
     super(app, userSessions);
     this.#baseUrl = "/user";
-    this.#persist = persist;
+    this.persist = persist;
   }
 
   setup() {
+    this.getApp().get(`${this.#baseUrl}s`, (req: Request, res: Response) => this.#getUsers(req, res));
+
     this.getApp().post(`${this.#baseUrl}`, (req: Request, res: Response) => this.#createUser(req, res));
     this.getApp().put(`${this.#baseUrl}`, (req: Request, res: Response) => this.#updateUser(req, res));
     this.getApp().delete(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#deleteUser(req, res));
@@ -33,11 +35,18 @@ export default class UserController extends ControllerBase {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
   } 
 
+  #getUsers(req: Request, res: Response) {
+    console.log('REST call get:users received');
+    const validator = () => true;
+    const operation = () => this.persist.getUsers();
+    this.handleRestCall(req, res, validator, operation);
+  }
+
   #createUser(req: Request, res: Response) {
     const user: User = req.body;
     console.log("REST call post:/user received");
     try {
-      this.#persist.addUser(user);
+      this.persist.addUser(user);
       console.log("call succesful: ", user);
       res.status(200).send(true);
     } catch (error: any) {
@@ -46,7 +55,7 @@ export default class UserController extends ControllerBase {
     }
   }
 
-  async #updateUser(req: Request, res: Response) {
+  #updateUser(req: Request, res: Response) {
     const user: User = req.body;
     const validator = () => {
       return this.validateId(user.id) &&
@@ -55,13 +64,16 @@ export default class UserController extends ControllerBase {
              this.validateId(user.personId);
     };
     const operation = () => {
-      return this.#persist.getUser(user.id)
+      return this.persist.getUser(user.id)
             .then((userCurrently: User) => {
               if (user.email !== userCurrently.email) {
-                this.#persist.updateUserField(user.id, "email", user.email);
+                this.persist.updateUserField(user.id, "email", user.email);
               }
               if (user.password !== userCurrently.password) {
-                this.#persist.updateUserField(user.id, "email", user.email);
+                this.persist.updateUserField(user.id, "password", user.password);
+              }
+              if (user.active !== userCurrently.active) {
+                this.persist.updateUserField(user.id, "active", user.active);
               }
               return true;
             })
@@ -73,7 +85,7 @@ export default class UserController extends ControllerBase {
   #deleteUser(req: Request, res: Response) {
     const userId: UUID  = this.uuidFromString(req.params.id);
     const validator = () => this.validateId(userId);
-    const operation = () => Promise.resolve(this.#persist.deleteUser(userId));
+    const operation = () => Promise.resolve(this.persist.deleteUser(userId));
     this.handleRestCall(req, res, validator, operation);
   }
 
@@ -81,9 +93,9 @@ export default class UserController extends ControllerBase {
     const loginDate: LoginData = req.body;
     console.log(`REST call post:/user/login received`);
     try {
-      const user: User = await this.#persist.getUserByEmail(loginDate.email);
+      const user: User = await this.persist.getUserByEmail(loginDate.email);
       if (user && user.password === loginDate.password) {
-        this.#persist.updateUserField(user.id, "lastLogin", (new Date().getTime()));
+        this.persist.updateUserField(user.id, "lastLogin", (new Date().getTime()));
 
         const sessionId = randomUUID();
         this.registerSessionForUser(sessionId, user.id);
@@ -105,5 +117,6 @@ export default class UserController extends ControllerBase {
   #logout(req: Request, res: Response) {
     const sessionId: string = req.get('sess') ?? "";;
     this.unregisterSession(sessionId);
+    res.status(200).send(true);
   }
 }

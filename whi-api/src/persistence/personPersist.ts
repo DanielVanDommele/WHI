@@ -13,18 +13,6 @@ export default class PersonPersist extends PersistBase {
     }
 
     getPersons(): Promise<Person[]> {
-        // return Promise.resolve([
-        //     {
-        //         id: '12341234-1234-1234-4234-123412341234',
-        //         name: 'test',
-        //         birthDate: 174854262000,
-        //         birthPlace: '00000000-0000-0000-0000-0000000000000',
-        //         gender: Gender.Male,
-        //         description: 'dit is een test',
-        //         relationType: RelationType.Self,
-        //         avatar: null
-        //     }
-        // ]);
         return this.retrieveList('SELECT * FROM person');
     }
 
@@ -33,11 +21,11 @@ export default class PersonPersist extends PersistBase {
     }
 
     getAllPersonRelations(id: UUID): Promise<Person[]> {
-        return this.retrieveList(`SELECT * FROM person INNER JOIN personRelations ON person.id === personRelations.personId1 WHERE person.id = '${id.toString()}'`);
+        return this.retrieveList(`SELECT person.* FROM person INNER JOIN personRelation ON person.id = personRelation.personId2 WHERE personRelation.personId1 = '${id.toString()}'`);
     }
 
     getSpecificPersonRelations(id: UUID, relationType: RelationType): Promise<Person[]> {
-        return this.retrieveList(`SELECT * FROM person INNER JOIN personRelations ON person.id === personRelations.personId1 WHERE person.id = '${id.toString()}' AND relationType = ${relationType}`);
+        return this.retrieveList(`SELECT person.s* FROM person INNER JOIN personRelation ON person.id = personRelation.personId2 WHERE personRelation.personId1 = '${id.toString()}' AND relationType = ${relationType}`);
     }
 
     addPerson(person: Person) {

@@ -30,7 +30,11 @@ export default class PersistBase {
     retrieve(selectQuery: string): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
             this.#db.get(selectQuery, (err: any, row: any) => {
-                resolve(row);
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
             });
         });
     }
@@ -38,12 +42,22 @@ export default class PersistBase {
     retrieveList(selectQuery: string): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
             this.#db.all(selectQuery, (err: any, rows: any[]) => {
-                resolve(rows);
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
             });
         });
     }
 
     execute(mutateQuery: string) {
-        this.#db.run(mutateQuery);
+        console.log('execute', mutateQuery); 
+        try {
+            this.#db.run(mutateQuery);    
+        } catch (e) {
+            console.error('query execute error', e);
+        }
+        
     }
 }
