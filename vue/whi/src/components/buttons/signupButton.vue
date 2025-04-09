@@ -1,0 +1,31 @@
+<template>
+  <div class="signup-button" @click="() => signup()">Sign up</div>
+</template>
+
+<script lang="ts">
+import { Vue, Options } from "vue-class-component";
+
+@Options({
+  methods: {
+    signup() {
+      // empty for now
+    },
+  },
+})
+export default class SignupButton extends Vue {}
+</script>
+
+<style>
+.signup-button {
+  border: 1px solid #000000;
+  background: #efefef;
+  color: #000000;
+  text-align: center;
+  font-size: 14px;
+  font-weight: Bold;
+  font-family: Tahoma;
+  padding: 2px 8px;
+  margin: 3px 2px;
+  cursor: pointer;
+}
+</style>

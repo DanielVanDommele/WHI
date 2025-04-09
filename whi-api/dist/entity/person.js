@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RelationType = exports.Gender = void 0;
+var Gender;
+(function (Gender) {
+    Gender[Gender["Male"] = 0] = "Male";
+    Gender[Gender["Female"] = 1] = "Female";
+    Gender[Gender["Unknown"] = 2] = "Unknown";
+})(Gender || (exports.Gender = Gender = {}));
+var RelationType;
+(function (RelationType) {
+    RelationType[RelationType["Father"] = 0] = "Father";
+    RelationType[RelationType["Mother"] = 1] = "Mother";
+    RelationType[RelationType["Grandfather"] = 2] = "Grandfather";
+    RelationType[RelationType["GrandMother"] = 3] = "GrandMother";
+    RelationType[RelationType["Son"] = 4] = "Son";
+    RelationType[RelationType["Daughter"] = 5] = "Daughter";
+    RelationType[RelationType["Nephew"] = 6] = "Nephew";
+    RelationType[RelationType["Niece"] = 7] = "Niece";
+    RelationType[RelationType["Uncle"] = 8] = "Uncle";
+    RelationType[RelationType["Aunt"] = 9] = "Aunt";
+    RelationType[RelationType["GrandSon"] = 10] = "GrandSon";
+    RelationType[RelationType["GrandDaughter"] = 11] = "GrandDaughter";
+    RelationType[RelationType["Cousin"] = 12] = "Cousin";
+    RelationType[RelationType["Husband"] = 13] = "Husband";
+    RelationType[RelationType["Wife"] = 14] = "Wife";
+    RelationType[RelationType["Partner"] = 15] = "Partner";
+    RelationType[RelationType["InLaw"] = 16] = "InLaw";
+    RelationType[RelationType["Friend"] = 17] = "Friend";
+    RelationType[RelationType["Acquaintance"] = 18] = "Acquaintance";
+    RelationType[RelationType["Stranger"] = 19] = "Stranger";
+    RelationType[RelationType["Self"] = 20] = "Self";
+    RelationType[RelationType["Unknown"] = 21] = "Unknown";
+})(RelationType || (exports.RelationType = RelationType = {}));
