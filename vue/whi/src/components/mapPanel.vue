@@ -25,7 +25,6 @@ import { onMounted } from "vue";
 let map: Map | null = null;
 
 function init() {
-  console.log("init fn reached");
   map = L.map("map", {
     center: L.latLng(51.98, 5.91),
     zoom: 14,
@@ -43,7 +42,6 @@ function init() {
     attribution: attribution,
     crossOrigin: true,
   }).addTo(map);
-  console.log(key, attribution, tileUrl);
 }
 
 onMounted(() => init());
