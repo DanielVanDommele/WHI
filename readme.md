@@ -3,10 +3,10 @@
 This readme desribes:
 
 * development of issues
-** currently in development
-** next in development
-** Backlog
-** finished tasks
+* currently in development
+* next in development
+* Backlog
+* finished tasks
 * How to deploy the projects
 
 For comparison of the different popular frameworks, the choice is made to implement the interface four times in the following frameworks:
