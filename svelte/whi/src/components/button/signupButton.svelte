@@ -1,13 +1,12 @@
 <script lang="ts">
   import { loginState } from '../../store';
 
-  function doLogin(name: string) {
-    loginState.login(name);
+  function doSignup() {
   }
 </script>
 
 <style>
-  .login-button {
+  .signup-button {
   border: 1px solid #000000;
   background: #efefef;
   color: #000000;
@@ -21,4 +20,4 @@
 }
 </style>
 
-<button class="login-button" onclick={() => doLogin('Daniël')}>Login</button>
+<button class="signup-button" onclick={() => doSignup()}>Sign up</button>

@@ -11,25 +11,27 @@ This readme desribes:
 
 For comparison of the different popular frameworks, the choice is made to implement the interface four times in the following frameworks:
 * Angular
-* React
-* Svelte
+* React	(*note:* this frontend development is currently being discontinued due to prioritizing Angular and Vue and disliking the React framework)
+* Svelte (*note:* this frontend development is currently being discontinued due to prioritizing Angular and Vue, and Svelte currently being the lest requested framework 
 * Vue
+
+*note:* The discontinued developments of the React and Svelte frontends may be picked up again later, but currently the top priority lies on Angular and Vue to have more to demo quicklier)
+
 
 ## Development
 
 ### Currently in development:
 
+* Text in DetailPanel when not logged in (Angular, Vue)
 * Map display (React, Svelte)
-* Signup button - dud (React, Svelte)
 
 ### Next in development:
 
-* Text in DetailPanel when not logged in (Angular, React, Svelte, Vue)
+* Signup step 1: Dialog for person data - Name, Gender, Birthdate, Birth place, Description, Avatar (Angular, Vue)
+* Signup step 2: Dialog for user data - Email, password etc 
 
 ### Backlog:
 
-* Signup step 1: Dialog for person data - Name, Gender, Birthdate, Birth place, Description, Avatar (Angular, React, Svelte, Vue)
-* Signup step 2: Dialog for user data - Email, password etc 
 * Security for communication between frontend and backend 
 * Login and Logout user 
 * Display user/person data after logging in, in detailPanel

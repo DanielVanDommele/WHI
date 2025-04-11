@@ -1,6 +1,7 @@
 <script lang="ts">
   import { loginState } from '../store';
 
+  import SignupButton from './button/signupButton.svelte';
   import LoginButton from './button/loginButton.svelte';
   import LogoutButton from './button/logoutButton.svelte';
 
@@ -56,6 +57,7 @@
       <LogoutButton />
     {:else}
       <LoginButton />
+      <SignupButton />
     {/if}
   </div>
 </div>
