@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
+import LoginStateService from './loginstate.service';
+import Explanation from './details/explanation.component';
+import SelectionDetails from './details/selectionDetails.component';
 
 @Component({
   selector: 'DetailPanel',
-  imports: [],
-  template: `DetailPanel`,
+  imports: [Explanation, SelectionDetails],
+  template: `@if (isLoggedIn()) {
+        <SelectionDetails />
+      }
+      @else {
+        <Explanation />
+      }
+  `,
   styles: `
 :host, .detail-panel {
   width: 300px;
   border-left: 2px solid #000000;
-  font-size: 22px;
-  font-weight: bold;
-  font-style: italic;
   font-family: Tahoma;
   text-align: center;
   padding-top: 12px;
@@ -18,4 +24,9 @@ import { Component } from '@angular/core';
   `
 })
 export default class DetailPanel {
+  constructor(public loginStateService: LoginStateService) {}
+
+  isLoggedIn() : boolean {
+    return this.loginStateService.getIsLoggedIn() === true;
+  }
 }
