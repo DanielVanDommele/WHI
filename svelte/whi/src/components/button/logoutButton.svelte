@@ -16,7 +16,7 @@
   font-weight: Bold;
   font-family: Tahoma;
   padding: 2px 8px;
-  margin: 3px 8px;
+  margin: 3px 2px;
   cursor: pointer;
 }
 </style>
