@@ -24,5 +24,8 @@ class PlacePersist extends PersistBase_1.default {
     deletePlace(id) {
         this.execute(`DELETE FROM place WHERE id='${id}'`);
     }
+    deleteAll() {
+        this.execute('DELETE FROM place');
+    }
 }
 exports.default = PlacePersist;

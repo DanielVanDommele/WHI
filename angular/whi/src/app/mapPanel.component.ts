@@ -10,7 +10,6 @@ import 'leaflet/dist/leaflet.css';
   styles: `
 :host {
   flex: 1;
-  border-top: 2px solid #000000;
 }
 
 #map {

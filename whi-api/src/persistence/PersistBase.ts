@@ -5,6 +5,10 @@ export default class PersistBase {
         this.#db = db;
     }
 
+    getDb(): any {
+        return this.#db;
+    }
+
     checkTableExistance(tableName: string, columns: string): Promise<boolean> {
         return new Promise((resolve: any, reject: any) => {
             this.#db.get(`SELECT name FROM sqlite_master WHERE type='table' AND name='${tableName}'`, (err: any, row: any) => {

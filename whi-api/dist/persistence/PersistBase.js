@@ -17,6 +17,9 @@ class PersistBase {
         _PersistBase_db.set(this, void 0);
         __classPrivateFieldSet(this, _PersistBase_db, db, "f");
     }
+    getDb() {
+        return __classPrivateFieldGet(this, _PersistBase_db, "f");
+    }
     checkTableExistance(tableName, columns) {
         return new Promise((resolve, reject) => {
             __classPrivateFieldGet(this, _PersistBase_db, "f").get(`SELECT name FROM sqlite_master WHERE type='table' AND name='${tableName}'`, (err, row) => {

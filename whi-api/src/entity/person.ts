@@ -1,12 +1,13 @@
 import { UUID } from "crypto";
 
 export enum Gender {
+    Unknown,
     Male,
-    Female,
-    Unknown
+    Female
 }
 
 export enum RelationType {
+    Self,
     Father,
     Mother,
     Grandfather,
@@ -27,7 +28,6 @@ export enum RelationType {
     Friend,
     Acquaintance,
     Stranger,
-    Self,
     Unknown
 }
 

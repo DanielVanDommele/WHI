@@ -40,7 +40,7 @@ class ControllerBase {
     }
     handleRestCall(req, res, validator, operation) {
         var _a;
-        console.log(`REST call ${req.url} received`);
+        console.log(`REST call ${req.method} ${req.url} received`);
         if (this.isAuthorized(req, res) && this.isValidRequest(req, res, validator)) {
             const sessionId = (_a = req.get("sess")) !== null && _a !== void 0 ? _a : "";
             try {
@@ -60,17 +60,17 @@ class ControllerBase {
         }
     }
     isAuthorized(req, res) {
+        var _a;
+        const sessionId = (_a = req.get("sess")) !== null && _a !== void 0 ? _a : "";
+        if (sessionId === "" || __classPrivateFieldGet(this, _ControllerBase_userSessions, "f")[sessionId] === undefined) {
+            // there is no login or logged in user is not known
+            res.status(403).send("you are not authorized");
+            return false;
+        }
         return true;
-        // const sessionId: string = req.get("sess") ?? "";
-        // if (sessionId === "" || this.#userSessions[sessionId] === undefined) {
-        //     // there is no login or logged in user is not known
-        //     res.status(403).send("you are not authorized");
-        //     return false;
-        // }
-        // return true;
     }
     isValidRequest(req, res, validator) {
-        console.log(validator());
+        console.log("isValidRequest", validator, validator());
         if (validator()) {
             return true;
         }

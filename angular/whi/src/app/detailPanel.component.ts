@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import LoginStateService from './loginstate.service';
+import LoginStateService from './services/state/loginstate.service';
 import Explanation from './details/explanation.component';
 import SelectionDetails from './details/selectionDetails.component';
 

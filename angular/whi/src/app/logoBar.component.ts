@@ -1,30 +1,29 @@
-import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
-import LoginStateService from './loginstate.service';
-import LoginButton from './button/loginButton.component';
-import LogoutButton from './button/logoutButton.component';
-import SignupButton from './button/signupButton.component';
+import LoginStateService from './services/state/loginstate.service';
+import WindowStateService from './services/state/windowstate.service';
+import LoginRequestService from './services/loginRequest.service';
 
 @Component({
   selector: 'LogoBar',
-  imports: [LoginButton, LogoutButton, SignupButton],
+  imports: [ButtonModule],
   template: `<div class="logo-bar">
   <div class="logo-text">WHI? (Angular version)</div>
     <div class="login-info">{{ showLoginInformation() }}</div>
     <div class="button-space">
       @if (isLoggedIn()) {
-        <LogoutButton />
+        <p-button label="Log out" size="small" class="bar-button" (onClick)="logout()" />
       }
       @else {
-        <LoginButton />
-        <SignupButton />
+        <p-button label="Log in" size="small" class="bar-button" (onClick)="login()" />
+        <p-button label="Sign up!" size="small" class="bar-button" (onClick)="signup()" />
       }
     </div>
   </div>`,
   styles: `
 :host, .logo-bar {
-  height: 30px;
+  height: 40px;
 }
 
 .logo-bar {
@@ -32,6 +31,7 @@ import SignupButton from './button/signupButton.component';
   display: flex;
   flex-flow: row nowrap;
   background: #09a2e4;
+  align-items: center;
   vertical-align: middle;
   border-bottom: 2px solid #000000;
 }
@@ -51,7 +51,6 @@ import SignupButton from './button/signupButton.component';
   color: #000000;
   font-family: Tahoma;
   font-size: 14px;
-  padding-top: 5px;
   padding-right: 5px;
   text-align: right;
 }
@@ -62,10 +61,18 @@ import SignupButton from './button/signupButton.component';
   padding: 0px 1px;
   margin: 0px;
 }
+
+.bar-button {
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+  margin: 2px 8px;
+}
   `
 })
 export default class LogoBar {
-  constructor(public loginStateService: LoginStateService) {};
+  loginStateService = inject(LoginStateService);
+  loginRequestService = inject(LoginRequestService);
+  windowStateService = inject(WindowStateService);
 
   showLoginInformation(): string {
     if (this.loginStateService.getIsLoggedIn()) {
@@ -77,5 +84,17 @@ export default class LogoBar {
 
   isLoggedIn() : boolean {
     return this.loginStateService.getIsLoggedIn() === true;
+  }
+
+  login() {
+    this.windowStateService.setIsWindowVisible('login', true);
+  }
+
+  logout() {
+    this.loginRequestService.logout();
+  }
+
+  signup() {
+    this.windowStateService.setIsWindowVisible('signup', true);
   }
 }

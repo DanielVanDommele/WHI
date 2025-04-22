@@ -136,4 +136,9 @@ export default class PresencePersist extends PersistBase {
         this.removePersonFromPresence(presence.id, creatorPersonId);
         this.execute(`DELETE FROM presence WHERE id = '${presence.id}'`);
     }
+
+    deleteAll() {
+        this.execute('DELETE FROM presence');
+        this.execute('DELETE FROM personPresence');
+    }
 }

@@ -8,7 +8,9 @@ import PlaceManager from "./manager/placeManager";
 import PresenceManager from "./manager/presenceManager";
 import UserManager from "./manager/userManager";
 
-const userSessions: any = {};
+const userSessions: any = {
+    "AFDA80D5-1A5A-SA5A-8A5A-D3BAD15AB07A": "AFDA80D5-1A5A-SA5A-8A5A-D3BAD15AB07A"
+};
 
 const app = express();
 app.use(cors());

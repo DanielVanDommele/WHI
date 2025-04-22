@@ -36,7 +36,7 @@ export default class ControllerBase {
     }
 
     handleRestCall(req: Request, res: Response, validator: Function, operation: Function) {
-        console.log(`REST call ${req.url} received`); 
+        console.log(`REST call ${req.method} ${req.url} received`); 
         if (this.isAuthorized(req, res) && this.isValidRequest(req, res, validator)) {
             const sessionId: string = req.get("sess") ?? "";
             try {
@@ -66,7 +66,7 @@ export default class ControllerBase {
     }
 
     isValidRequest(req: Request, res: Response, validator: Function): boolean {
-        console.log(validator());
+        console.log("isValidRequest", validator, validator());
         if (validator()) {
             return true;
         }

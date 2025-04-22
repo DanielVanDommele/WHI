@@ -27,6 +27,7 @@ export default class PresenceController extends ControllerBase {
 
       this.getApp().delete(`${this.#baseUrl}/:presenceId/minus/:personId`, (req: Request, res: Response) => this.#removePersonFromPresence(req, res));
       this.getApp().delete(`${this.#baseUrl}/:personId`, (req: Request, res: Response) => this.#deletePresence(req, res));
+      this.getApp().delete(`${this.#baseUrl}s/all`, (req: Request, res: Response) => this.#deleteAll(req, res));
     }
 
     validatePresence(presence: Presence): boolean {
@@ -88,6 +89,12 @@ export default class PresenceController extends ControllerBase {
       const presence: Presence = req.body;
       const validator = () => this.validateId(personId) && this.validatePresence(presence);
       const operation = () => Promise.resolve(this.#persist.deletePresence(presence, personId));
+      this.handleRestCall(req, res, validator, operation);
+    }
+    
+    #deleteAll(req: Request, res: Response) {
+      const validator = () => true;
+      const operation = () => Promise.resolve(this.#persist.deleteAll());
       this.handleRestCall(req, res, validator, operation);
     }
   }

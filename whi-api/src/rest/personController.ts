@@ -29,6 +29,7 @@ export default class PersonController extends ControllerBase {
 
       this.getApp().delete(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#deletePerson(req, res));
       this.getApp().delete(`${this.#baseUrl}/relations/:id1/:id2`, (req: Request, res: Response) => this.#deletePersonRelation(req, res));
+      this.getApp().delete(`${this.#baseUrl}s/all`, (req: Request, res: Response) => this.#deleteAll(req, res));
     }
 
     #validatePerson(person: Person): boolean {
@@ -102,6 +103,15 @@ export default class PersonController extends ControllerBase {
       const relatedPersonId: UUID = this.uuidFromString(req.params.id2);
       const validator = () => this.validateId(personId) && this.validateId(relatedPersonId);
       const operation = () => Promise.resolve(this.persist.deletePersonRelation(personId, relatedPersonId));
+      this.handleRestCall(req, res, validator, operation);
+    }
+
+    #deleteAll(req: Request, res: Response) {
+      console.log("deleteAll");
+      const validator = () => true;
+      console.log("validator value:", validator());
+      const operation = () => Promise.resolve(this.persist.deleteAll());
+      console.log("go to handleRestCall");
       this.handleRestCall(req, res, validator, operation);
     }
   }

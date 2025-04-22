@@ -13,7 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _PresenceController_instances, _PresenceController_baseUrl, _PresenceController_persist, _PresenceController_getAnyPresences, _PresenceController_getPersonPresences, _PresenceController_addPresence, _PresenceController_addPersonToPresence, _PresenceController_updatePresence, _PresenceController_removePersonFromPresence, _PresenceController_deletePresence;
+var _PresenceController_instances, _PresenceController_baseUrl, _PresenceController_persist, _PresenceController_getAnyPresences, _PresenceController_getPersonPresences, _PresenceController_addPresence, _PresenceController_addPersonToPresence, _PresenceController_updatePresence, _PresenceController_removePersonFromPresence, _PresenceController_deletePresence, _PresenceController_deleteAll;
 Object.defineProperty(exports, "__esModule", { value: true });
 const ControllerBase_1 = __importDefault(require("./ControllerBase"));
 class PresenceController extends ControllerBase_1.default {
@@ -33,6 +33,7 @@ class PresenceController extends ControllerBase_1.default {
         this.getApp().put(`${__classPrivateFieldGet(this, _PresenceController_baseUrl, "f")}`, (req, res) => __classPrivateFieldGet(this, _PresenceController_instances, "m", _PresenceController_updatePresence).call(this, req, res));
         this.getApp().delete(`${__classPrivateFieldGet(this, _PresenceController_baseUrl, "f")}/:presenceId/minus/:personId`, (req, res) => __classPrivateFieldGet(this, _PresenceController_instances, "m", _PresenceController_removePersonFromPresence).call(this, req, res));
         this.getApp().delete(`${__classPrivateFieldGet(this, _PresenceController_baseUrl, "f")}/:personId`, (req, res) => __classPrivateFieldGet(this, _PresenceController_instances, "m", _PresenceController_deletePresence).call(this, req, res));
+        this.getApp().delete(`${__classPrivateFieldGet(this, _PresenceController_baseUrl, "f")}s/all`, (req, res) => __classPrivateFieldGet(this, _PresenceController_instances, "m", _PresenceController_deleteAll).call(this, req, res));
     }
     validatePresence(presence) {
         return this.validateId(presence.id) &&
@@ -81,6 +82,10 @@ _PresenceController_baseUrl = new WeakMap(), _PresenceController_persist = new W
     const presence = req.body;
     const validator = () => this.validateId(personId) && this.validatePresence(presence);
     const operation = () => Promise.resolve(__classPrivateFieldGet(this, _PresenceController_persist, "f").deletePresence(presence, personId));
+    this.handleRestCall(req, res, validator, operation);
+}, _PresenceController_deleteAll = function _PresenceController_deleteAll(req, res) {
+    const validator = () => true;
+    const operation = () => Promise.resolve(__classPrivateFieldGet(this, _PresenceController_persist, "f").deleteAll());
     this.handleRestCall(req, res, validator, operation);
 };
 exports.default = PresenceController;

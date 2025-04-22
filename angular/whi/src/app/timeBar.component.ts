@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'TimeBar',
   imports: [],
-  template: `<div class="time-bar">Te doen: Schuifbalk voor de tijd (komt pas later)</div>`,
+  template: `<div class="time-bar"> </div>`,
   styles: `
 :host, .time-bar {
-  height: 30px;
+  height: 40px;
 }
 .time-bar {
   align-items: stretch;
@@ -17,7 +17,6 @@ import { Component } from '@angular/core';
   font-size: 22px;
   font-style: italic;
   font-weight: Bold;
-  height: 30px;
   padding-left: 5px;
   vertical-align: middle;
 }

@@ -13,7 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _PersonController_instances, _PersonController_baseUrl, _PersonController_validatePerson, _PersonController_getPersons, _PersonController_getPerson, _PersonController_getPersonRelations, _PersonController_getPersonSpecificRelations, _PersonController_addPerson, _PersonController_addPersonRelation, _PersonController_updatePerson, _PersonController_deletePerson, _PersonController_deletePersonRelation;
+var _PersonController_instances, _PersonController_baseUrl, _PersonController_validatePerson, _PersonController_getPersons, _PersonController_getPerson, _PersonController_getPersonRelations, _PersonController_getPersonSpecificRelations, _PersonController_addPerson, _PersonController_addPersonRelation, _PersonController_updatePerson, _PersonController_deletePerson, _PersonController_deletePersonRelation, _PersonController_deleteAll;
 Object.defineProperty(exports, "__esModule", { value: true });
 const ControllerBase_1 = __importDefault(require("./ControllerBase"));
 class PersonController extends ControllerBase_1.default {
@@ -34,6 +34,7 @@ class PersonController extends ControllerBase_1.default {
         this.getApp().put(`${__classPrivateFieldGet(this, _PersonController_baseUrl, "f")}/:id`, (req, res) => __classPrivateFieldGet(this, _PersonController_instances, "m", _PersonController_updatePerson).call(this, req, res));
         this.getApp().delete(`${__classPrivateFieldGet(this, _PersonController_baseUrl, "f")}/:id`, (req, res) => __classPrivateFieldGet(this, _PersonController_instances, "m", _PersonController_deletePerson).call(this, req, res));
         this.getApp().delete(`${__classPrivateFieldGet(this, _PersonController_baseUrl, "f")}/relations/:id1/:id2`, (req, res) => __classPrivateFieldGet(this, _PersonController_instances, "m", _PersonController_deletePersonRelation).call(this, req, res));
+        this.getApp().delete(`${__classPrivateFieldGet(this, _PersonController_baseUrl, "f")}s/all`, (req, res) => __classPrivateFieldGet(this, _PersonController_instances, "m", _PersonController_deleteAll).call(this, req, res));
     }
 }
 _PersonController_baseUrl = new WeakMap(), _PersonController_instances = new WeakSet(), _PersonController_validatePerson = function _PersonController_validatePerson(person) {
@@ -89,6 +90,13 @@ _PersonController_baseUrl = new WeakMap(), _PersonController_instances = new Wea
     const relatedPersonId = this.uuidFromString(req.params.id2);
     const validator = () => this.validateId(personId) && this.validateId(relatedPersonId);
     const operation = () => Promise.resolve(this.persist.deletePersonRelation(personId, relatedPersonId));
+    this.handleRestCall(req, res, validator, operation);
+}, _PersonController_deleteAll = function _PersonController_deleteAll(req, res) {
+    console.log("deleteAll");
+    const validator = () => true;
+    console.log("validator value:", validator());
+    const operation = () => Promise.resolve(this.persist.deleteAll());
+    console.log("go to handleRestCall");
     this.handleRestCall(req, res, validator, operation);
 };
 exports.default = PersonController;

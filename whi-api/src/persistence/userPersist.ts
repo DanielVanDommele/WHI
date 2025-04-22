@@ -31,4 +31,8 @@ export default class UserPersist extends PersistBase {
     deleteUser(userId: UUID) {
         this.execute(`DELETE FROM user WHERE id = '${userId}'`);
     }
+
+    deleteAll() {
+        this.execute('DELETE FROM user');
+    }
 }

@@ -47,4 +47,9 @@ export default class PersonPersist extends PersistBase {
     deletePersonRelation(id1: UUID, id2: UUID) {
         this.execute(`DELETE FROM personRelation WHERE personId1 = '${id1.toString()}' AND personId2 = '${id2.toString()}'`)
     }
+
+    deleteAll() {
+        this.execute('DELETE FROM personRelation');
+        this.execute('DELETE FROM person');
+    }
 }

@@ -22,6 +22,7 @@ export default class PlaceController extends ControllerBase {
       this.getApp().post(`${this.#baseUrl}`, (req: Request, res: Response) => this.#createPlace(req, res));
       this.getApp().put(`${this.#baseUrl}`, (req: Request, res: Response) => this.#updatePlace(req, res));
       this.getApp().delete(`${this.#baseUrl}/:id`, (req: Request, res: Response) => this.#deletePlace(req, res));
+      this.getApp().delete(`${this.#baseUrl}s/all`, (req: Request, res: Response) => this.#deleteAll(req, res));
     }
 
     validatePlace(place: Place): boolean {
@@ -62,6 +63,12 @@ export default class PlaceController extends ControllerBase {
       const placeId: UUID = this.uuidFromString(req.params.id);
       const validator = () => this.validateId(placeId);
       const operation = () => Promise.resolve(this.persist.deletePlace(placeId));
+      this.handleRestCall(req, res, validator, operation);
+    }
+    
+    #deleteAll(req: Request, res: Response) {
+      const validator = () => true;
+      const operation = () => Promise.resolve(this.persist.deleteAll());
       this.handleRestCall(req, res, validator, operation);
     }
   }

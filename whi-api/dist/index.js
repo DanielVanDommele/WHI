@@ -10,7 +10,9 @@ const personManager_1 = __importDefault(require("./manager/personManager"));
 const placeManager_1 = __importDefault(require("./manager/placeManager"));
 const presenceManager_1 = __importDefault(require("./manager/presenceManager"));
 const userManager_1 = __importDefault(require("./manager/userManager"));
-const userSessions = {};
+const userSessions = {
+    "AFDA80D5-1A5A-SA5A-8A5A-D3BAD15AB07A": "AFDA80D5-1A5A-SA5A-8A5A-D3BAD15AB07A"
+};
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
