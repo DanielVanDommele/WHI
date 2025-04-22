@@ -28,14 +28,15 @@ This will be done in the following order:
 ### Currently in development:
 
 * Mark Birthplace on Map
-* Add a person relation
+* Unit tests in backend and frontend
 
 ### Next in development:
 
-* Unit tests in backend and frontend
+* Add a person relation
 
 ### Backlog:
 
+* See person relations
 * Remove a person relation
 * Add a presence step 1: Context menu on Map
 * Add a presence step 2: Dialog for WHere (already filled in because of map click), WHen, WHo, WHat, WHy?
